@@ -1,6 +1,6 @@
 class Tree {
     constructor() {
-        this.root = null;    
+        this.root = null;
     }
 
     addNode(node) {
@@ -25,7 +25,20 @@ class Tree {
                 this._addNodeRecursive(parent.right, child);
             }
         }
-        // Si es igual, no hacemos nada (puedes decidir cómo manejar duplicados)
+    }
+
+    hasNode(value) {
+        return this._hasNodeRecursive(this.root, value);
+    }
+
+    _hasNodeRecursive(node, value) {
+        if (!node) return false;
+        if (node.data === value) return true;
+        if (value < node.data) {
+            return this._hasNodeRecursive(node.left, value);
+        } else {
+            return this._hasNodeRecursive(node.right, value);
+        }
     }
 }
 
