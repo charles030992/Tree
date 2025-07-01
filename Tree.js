@@ -5,19 +5,27 @@ class Tree {
 
     addNode(node) {
         if (!this.root) {
-            // Si el árbol está vacío, el nuevo nodo es la raíz
             this.root = node;
         } else {
-            // Si el árbol ya tiene raíz, comparamos los datos
-            if (node.data < this.root.data) {
-                // Si es menor, va a la izquierda
-                this.root.left = node;
-            } else if (node.data > this.root.data) {
-                // Si es mayor, va a la derecha
-                this.root.right = node;
-            }
-            // Si es igual, no hacemos nada (puedes decidir cómo manejar duplicados)
+            this._addNodeRecursive(this.root, node);
         }
+    }
+
+    _addNodeRecursive(parent, child) {
+        if (child.data < parent.data) {
+            if (!parent.left) {
+                parent.left = child;
+            } else {
+                this._addNodeRecursive(parent.left, child);
+            }
+        } else if (child.data > parent.data) {
+            if (!parent.right) {
+                parent.right = child;
+            } else {
+                this._addNodeRecursive(parent.right, child);
+            }
+        }
+        // Si es igual, no hacemos nada (puedes decidir cómo manejar duplicados)
     }
 }
 
